@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Banele Monamudi — IT Professional</title>
+<meta name="description" content="IT Technician, Helpdesk & Desktop Support, Field Tech, Cybersecurity — Gauteng, SA">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0A0F1E; --surface: #111827; --surface2: #1A2235; --border: #1F2D45;
+    --accent: #3B82F6; --accent2: #60A5FA; --accent-glow: rgba(59,130,246,0.15);
+    --text: #E2E8F0; --muted: #94A3B8; --green: #22C55E; --red: #EF4444;
+    --mono: 'JetBrains Mono', monospace; --sans: 'Inter', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 15px; line-height: 1.6; overflow-x: hidden; }
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    background: rgba(10,15,30,0.92); backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 40px; height: 62px;
+  }
+  .nav-logo { font-family: var(--mono); font-size: 14px; color: var(--accent2); letter-spacing: 0.05em; text-decoration: none; }
+  .nav-logo span { color: var(--muted); }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; position: relative; padding-bottom: 2px; }
+  .nav-links a::after { content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 2px; background: var(--accent); border-radius: 2px; transform: scaleX(0); transition: transform 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--text); }
+  .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+  .nav-right { display: flex; align-items: center; gap: 16px; }
+  .nav-cta { background: var(--accent); color: #fff; border: none; padding: 8px 20px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; text-decoration: none; transition: all 0.2s; font-family: var(--sans); }
+  .nav-cta:hover { background: var(--accent2); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(59,130,246,0.35); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all 0.3s; }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* Mobile menu */
+  .mobile-menu {
+    display: none; position: fixed; top: 62px; left: 0; right: 0; z-index: 190;
+    background: rgba(10,15,30,0.98); backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border); padding: 20px 24px 28px;
+    flex-direction: column; gap: 6px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { color: var(--muted); text-decoration: none; font-size: 15px; font-weight: 500; padding: 10px 0; border-bottom: 1px solid var(--border); transition: color 0.2s; }
+  .mobile-menu a:last-child { border-bottom: none; color: var(--accent2); }
+  .mobile-menu a:hover { color: var(--text); }
+
+  /* ── HERO ── */
+  .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 100px 40px 60px; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -200px; right: -200px; width: 700px; height: 700px; background: radial-gradient(circle, rgba(59,130,246,0.09) 0%, transparent 70%); pointer-events: none; }
+  .hero::after { content: ''; position: absolute; bottom: -100px; left: -100px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(96,165,250,0.05) 0%, transparent 70%); pointer-events: none; }
+  .hero-inner { max-width: 900px; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--accent-glow); border: 1px solid rgba(59,130,246,0.3); padding: 6px 14px; border-radius: 100px; margin-bottom: 24px; }
+  .badge-dot { width: 7px; height: 7px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;}50%{opacity:0.3;} }
+  .badge-text { font-size: 12px; color: var(--accent2); font-weight: 500; }
+  .hero-name { font-size: clamp(34px, 5vw, 52px); font-weight: 700; line-height: 1.08; letter-spacing: -0.025em; color: var(--text); margin-bottom: 12px; }
+  .hero-name span { color: var(--accent2); }
+  .hero-title { font-family: var(--mono); font-size: 12px; color: var(--accent); margin-bottom: 20px; letter-spacing: 0.06em; min-height: 20px; }
+  .hero-bio { color: var(--muted); font-size: 14.5px; line-height: 1.75; margin-bottom: 32px; }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary { background: var(--accent); color: #fff; padding: 11px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; border: none; cursor: pointer; font-family: var(--sans); }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(59,130,246,0.35); }
+  .btn-secondary { background: transparent; color: var(--text); padding: 11px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; border: 1px solid var(--border); transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent2); transform: translateY(-2px); }
+
+  /* Terminal */
+  .terminal { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: 0 28px 80px rgba(0,0,0,0.5); }
+  .terminal-bar { background: var(--surface2); padding: 12px 16px; display: flex; align-items: center; gap: 8px; }
+  .dot { width: 11px; height: 11px; border-radius: 50%; }
+  .dot.r{background:#FF5F57;} .dot.y{background:#FFBD2E;} .dot.g{background:#27C93F;}
+  .terminal-title { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-left: 8px; }
+  .terminal-body { padding: 20px; font-family: var(--mono); font-size: 13px; line-height: 1.9; }
+  .t-prompt{color:var(--accent2);} .t-cmd{color:var(--text);} .t-out{color:var(--muted);} .t-green{color:var(--green);} .t-blue{color:var(--accent2);}
+  .cursor { display: inline-block; width: 8px; height: 14px; background: var(--accent); animation: blink 1s step-end infinite; vertical-align: middle; }
+  @keyframes blink { 50%{opacity:0;} }
+
+  /* ── SECTIONS ── */
+  section { padding: 90px 40px; max-width: 1000px; margin: 0 auto; }
+  .section-label { font-family: var(--mono); font-size: 11px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 10px; }
+  .section-title { font-size: clamp(24px, 3vw, 34px); font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 14px; }
+  .section-lead { color: var(--muted); font-size: 15px; max-width: 560px; line-height: 1.7; }
+
+  /* Roles */
+  .roles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 48px; }
+  .role-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 24px 20px; transition: all 0.25s; }
+  .role-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 14px 40px rgba(59,130,246,0.12); }
+  .role-icon { font-size: 26px; margin-bottom: 12px; }
+  .role-name { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .role-desc { font-size: 12px; color: var(--muted); line-height: 1.55; }
+
+  /* Skills */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-top: 48px; }
+  .skill-group { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 24px; transition: border-color 0.2s; }
+  .skill-group:hover { border-color: rgba(59,130,246,0.4); }
+  .skill-group-title { font-size: 13px; font-weight: 600; color: var(--accent2); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .skill-list { list-style: none; }
+  .skill-list li { font-size: 13px; color: var(--muted); padding: 5px 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
+  .skill-list li:last-child { border-bottom: none; }
+  .skill-list li::before { content: "▸"; color: var(--accent); font-size: 10px; }
+
+  /* Timeline */
+  .timeline { margin-top: 48px; }
+  .timeline-item { display: grid; grid-template-columns: 190px 1fr; gap: 32px; margin-bottom: 52px; position: relative; }
+  .timeline-item::before { content: ''; position: absolute; left: 196px; top: 10px; bottom: -52px; width: 1px; background: var(--border); }
+  .timeline-item:last-child::before { display: none; }
+  .timeline-meta { text-align: right; }
+  .timeline-date { font-family: var(--mono); font-size: 11px; color: var(--accent); margin-bottom: 4px; }
+  .timeline-company { font-size: 12px; color: var(--muted); }
+  .timeline-dot { position: absolute; left: 190px; top: 8px; width: 14px; height: 14px; background: var(--accent); border-radius: 50%; border: 3px solid var(--bg); }
+  .timeline-content { padding-left: 24px; }
+  .timeline-role { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
+  .timeline-bullets { list-style: none; }
+  .timeline-bullets li { font-size: 13px; color: var(--muted); padding: 4px 0; display: flex; align-items: flex-start; gap: 8px; line-height: 1.55; }
+  .timeline-bullets li::before { content: "▸"; color: var(--accent); font-size: 10px; margin-top: 4px; flex-shrink: 0; }
+
+  /* Certs */
+  .certs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 48px; }
+  .cert-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px 22px; display: flex; align-items: flex-start; gap: 16px; transition: all 0.25s; }
+  .cert-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .cert-card.inprogress { border-style: dashed; opacity: 0.75; }
+  .cert-icon { font-size: 26px; flex-shrink: 0; }
+  .cert-name { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .cert-issuer { font-size: 12px; color: var(--muted); }
+  .cert-year { font-family: var(--mono); font-size: 11px; color: var(--accent); margin-top: 6px; }
+
+  /* Projects */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 48px; }
+  .project-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 26px; transition: all 0.25s; }
+  .project-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 16px 50px rgba(59,130,246,0.12); }
+  .project-tag { display: inline-block; font-family: var(--mono); font-size: 10px; color: var(--accent); border: 1px solid rgba(59,130,246,0.3); padding: 2px 10px; border-radius: 100px; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.08em; }
+  .project-name { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
+  .project-desc { font-size: 13px; color: var(--muted); line-height: 1.65; margin-bottom: 14px; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { background: var(--surface2); color: var(--muted); border: 1px solid var(--border); font-size: 11px; padding: 3px 10px; border-radius: 4px; }
+
+  /* ── CONTACT ── */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 48px; margin-top: 48px; align-items: start; }
+  .contact-links { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+  .contact-link { display: flex; align-items: center; gap: 12px; color: var(--text); text-decoration: none; font-size: 14px; padding: 12px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; transition: all 0.2s; }
+  .contact-link:hover { border-color: var(--accent); color: var(--accent2); transform: translateX(4px); }
+  .contact-link-icon { font-size: 18px; }
+  .contact-link-label { font-size: 11px; color: var(--muted); display: block; }
+  .contact-link-val { font-size: 13px; font-weight: 500; }
+  .avail-box { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+  .avail-box h4 { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 12px; }
+  .avail-items { display: flex; flex-direction: column; gap: 9px; }
+  .avail-item { display: flex; align-items: center; gap: 10px; font-size: 12.5px; color: var(--muted); }
+  .avail-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .avail-dot.green{background:var(--green);} .avail-dot.blue{background:var(--accent2);}
+
+  /* CONTACT FORM */
+  .contact-form-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 32px; }
+  .contact-form-wrap h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+  .contact-form-wrap p { color: var(--muted); font-size: 13px; margin-bottom: 24px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; background: var(--surface2); border: 1px solid var(--border);
+    color: var(--text); padding: 10px 14px; border-radius: 8px;
+    font-size: 14px; font-family: var(--sans); outline: none; transition: border-color 0.2s;
+    resize: none;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--accent); }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: var(--border); }
+  .form-group select option { background: var(--surface2); }
+  .form-submit { width: 100%; padding: 13px; font-size: 14px; font-weight: 700; border-radius: 8px; border: none; cursor: pointer; background: var(--accent); color: #fff; font-family: var(--sans); transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .form-submit:hover:not(:disabled) { background: var(--accent2); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(59,130,246,0.35); }
+  .form-submit:disabled { opacity: 0.65; cursor: not-allowed; transform: none; }
+
+  /* Toast */
+  #toast {
+    position: fixed; bottom: 28px; right: 28px; z-index: 999;
+    padding: 14px 22px; border-radius: 10px; font-size: 14px; font-weight: 500;
+    display: flex; align-items: center; gap: 10px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    transform: translateY(80px); opacity: 0;
+    transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1);
+    pointer-events: none; max-width: 340px;
+  }
+  #toast.show { transform: translateY(0); opacity: 1; }
+  #toast.success { background: #052e16; border: 1px solid var(--green); color: #86efac; }
+  #toast.error { background: #2d0f0f; border: 1px solid var(--red); color: #fca5a5; }
+
+  /* Spinner */
+  .spinner { width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── FOOTER ── */
+  .divider { border: none; border-top: 1px solid var(--border); max-width: 1000px; margin: 0 auto; }
+  footer { border-top: 1px solid var(--border); padding: 30px 40px; text-align: center; color: var(--muted); font-size: 12px; font-family: var(--mono); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 800px) {
+    nav { padding: 0 20px; }
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .hero { padding: 80px 20px 40px; }
+    .hero-inner { grid-template-columns: 1fr; gap: 36px; }
+    section { padding: 60px 20px; }
+    .timeline-item { grid-template-columns: 1fr; gap: 6px; }
+    .timeline-item::before, .timeline-dot { display: none; }
+    .timeline-meta { text-align: left; }
+    .timeline-content { padding-left: 0; }
+    .contact-grid { grid-template-columns: 1fr; gap: 28px; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#about"><span>~/</span>banele.monamudi</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#certs">Certs</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a class="nav-cta" href="#contact">Hire Me</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#skills" onclick="closeMobile()">Skills</a>
+  <a href="#experience" onclick="closeMobile()">Experience</a>
+  <a href="#certs" onclick="closeMobile()">Certifications</a>
+  <a href="#projects" onclick="closeMobile()">Projects</a>
+  <a href="#contact" onclick="closeMobile()">📬 Contact Me</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="about">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">
+        <div class="badge-dot"></div>
+        <span class="badge-text">Available for opportunities</span>
+      </div>
+      <h1 class="hero-name">Banele<br><span>Monamudi</span></h1>
+      <p class="hero-title" id="typedTitle"></p>
+      <p class="hero-bio">
+        Hands-on IT professional based in Gauteng, SA — delivering helpdesk support, field network installations,
+        desktop engineering, and cybersecurity fundamentals. CCNA-trained, Ethical Hacking certified, and always building.
+      </p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#contact">📬 Get In Touch</a>
+        <a class="btn-secondary" href="#experience">View My Work →</a>
+      </div>
+    </div>
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+        <span class="terminal-title">banele@kali — bash</span>
+      </div>
+      <div class="terminal-body">
+        <div><span class="t-prompt">banele@kali</span><span class="t-cmd"> ~ $</span> <span class="t-out">whoami</span></div>
+        <div class="t-green">IT Technician · Field Tech · Helpdesk</div>
+        <br>
+        <div><span class="t-prompt">banele@kali</span><span class="t-cmd"> ~ $</span> <span class="t-out">cat skills.txt</span></div>
+        <div class="t-blue">→ Networking: CCNA, LAN/WAN, Fibre, CPE</div>
+        <div class="t-blue">→ Security: Ethical Hacking, Wireshark, Nmap</div>
+        <div class="t-blue">→ Support: Helpdesk T1–T3, AD, M365, RDP</div>
+        <div class="t-blue">→ Field: OTDR, Splicing, Structured Cabling</div>
+        <br>
+        <div><span class="t-prompt">banele@kali</span><span class="t-cmd"> ~ $</span> <span class="t-out">uptime --status</span></div>
+        <div class="t-green">✓ Available for hire · Gauteng &amp; remote</div>
+        <div><span class="t-prompt">banele@kali</span><span class="t-cmd"> ~ $</span> <span class="cursor"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- WHAT I DO -->
+<section>
+  <p class="section-label">// What I Do</p>
+  <h2 class="section-title">One professional.<br>Many capabilities.</h2>
+  <p class="section-lead">From the help desk queue to the server room to the field — I cover the full IT stack end-to-end.</p>
+  <div class="roles-grid">
+    <div class="role-card"><div class="role-icon">🖥️</div><div class="role-name">Helpdesk & Desktop Support</div><div class="role-desc">Tier 1–3 troubleshooting, Windows/M365, Active Directory, remote support via AnyDesk & RDP.</div></div>
+    <div class="role-card"><div class="role-icon">🌐</div><div class="role-name">Network & Infrastructure</div><div class="role-desc">LAN/WAN setup, switch & AP configuration, DNS/DHCP, IP conflict resolution, Cisco environments.</div></div>
+    <div class="role-card"><div class="role-icon">📡</div><div class="role-name">Field & Fibre Technician</div><div class="role-desc">CPE installation, fibre splicing, OTDR testing, structured cabling, RF validation across multiple sites.</div></div>
+    <div class="role-card"><div class="role-icon">🔐</div><div class="role-name">Cybersecurity</div><div class="role-desc">Ethical Hacking certified — Wireshark, Nmap, vulnerability assessments, firewall & ACL configuration.</div></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">// Technical Toolkit</p>
+  <h2 class="section-title">Skills & Technologies</h2>
+  <p class="section-lead">Broad practical experience across support, networking, field ops, and security.</p>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="skill-group-title">🖥️ Helpdesk & Desktop</div>
+      <ul class="skill-list">
+        <li>Windows OS Installation & Support</li>
+        <li>Microsoft 365 Administration</li>
+        <li>Active Directory & DNS/DHCP</li>
+        <li>AnyDesk & Remote Desktop (RDP)</li>
+        <li>ServiceNow · Zendesk · FreshService</li>
+        <li>Asset Management & Documentation</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">🌐 Networking</div>
+      <ul class="skill-list">
+        <li>LAN/WAN Troubleshooting</li>
+        <li>Cisco Switching & Routing (CCNA)</li>
+        <li>VLAN, TCP/IP, ADSL, VoIP</li>
+        <li>Switch & Access Point Configuration</li>
+        <li>IP Conflict Resolution</li>
+        <li>Cisco Packet Tracer</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">📡 Field & Fibre</div>
+      <ul class="skill-list">
+        <li>Fibre Optic Splicing & Termination</li>
+        <li>OTDR Testing & Analysis</li>
+        <li>CPE Setup & Configuration</li>
+        <li>RF/Wireless Signal Testing</li>
+        <li>Structured Cabling & Cable Runs</li>
+        <li>Dome Management</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">🔐 Cybersecurity</div>
+      <ul class="skill-list">
+        <li>Wireshark Packet Analysis</li>
+        <li>Nmap Network Scanning</li>
+        <li>Vulnerability Assessment</li>
+        <li>Firewall & ACL Configuration</li>
+        <li>Network Security Fundamentals</li>
+        <li>Ethical Hacking Methodology</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label">// Professional Background</p>
+  <h2 class="section-title">Experience</h2>
+  <p class="section-lead">Hands-on technical work in real campus environments with real infrastructure.</p>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-meta">
+        <div class="timeline-date">Jan 2024 – Aug 2025</div>
+        <div class="timeline-company">Ekurhuleni East TVET College · Gauteng</div>
+      </div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-role">IT Technician (Work-Based Experience)</div>
+        <ul class="timeline-bullets">
+          <li>Provided Tier 1–2 helpdesk and desktop support for staff and students across campus environments.</li>
+          <li>Installed, configured, and maintained network infrastructure — switches, wireless APs, and end-user devices — across multiple campus buildings.</li>
+          <li>Performed structured cabling including cable runs, patch panel termination, and cable management to professional standards.</li>
+          <li>Conducted LAN/Wi-Fi troubleshooting — signal validation, IP conflict resolution, and bandwidth testing.</li>
+          <li>Managed Windows OS deployment, user accounts, and Active Directory administration.</li>
+          <li>Maintained asset registers, service records, and job completion reports for audit and quality control.</li>
+          <li>Escalated complex faults with thorough incident documentation and follow-up.</li>
+          <li>Worked in physically demanding environments: equipment lifting, heights, and confined-space access.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CERTS -->
+<section id="certs">
+  <p class="section-label">// Learning & Credentials</p>
+  <h2 class="section-title">Certifications</h2>
+  <p class="section-lead">Verified credentials on <a href="https://credly.com/users/banelemonamudi" target="_blank" style="color:var(--accent2)">Credly</a> — actively building towards full CCNA.</p>
+  <div class="certs-grid">
+    <div class="cert-card"><div class="cert-icon">🛡️</div><div><div class="cert-name">Ethical Hacking</div><div class="cert-issuer">Certificate of Completion</div><div class="cert-year">2026 · Wireshark · Nmap · Vulnerability Assessment</div></div></div>
+    <div class="cert-card"><div class="cert-icon">🌐</div><div><div class="cert-name">CCNA – Introduction to Networks</div><div class="cert-issuer">Cisco Networking Academy</div><div class="cert-year">2024 · TCP/IP · LAN/WAN · Routing & Switching</div></div></div>
+    <div class="cert-card"><div class="cert-icon">🖥️</div><div><div class="cert-name">IT Essentials: Hardware & Software</div><div class="cert-issuer">Cisco Networking Academy</div><div class="cert-year">2023 · CompTIA A+ Aligned</div></div></div>
+    <div class="cert-card inprogress"><div class="cert-icon">⏳</div><div><div class="cert-name">CCNA (Full Certification)</div><div class="cert-issuer">Cisco — In Progress</div><div class="cert-year">Active pursuit · Enterprise networking</div></div></div>
+    <div class="cert-card"><div class="cert-icon">🎓</div><div><div class="cert-name">NCV IT & Computer Science NQF L4</div><div class="cert-issuer">Ekurhuleni East TVET College</div><div class="cert-year">2024</div></div></div>
+    <div class="cert-card"><div class="cert-icon">📋</div><div><div class="cert-name">National Senior Certificate</div><div class="cert-issuer">TANDI High School</div><div class="cert-year">Grade 12 · 2020</div></div></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label">// Featured Work</p>
+  <h2 class="section-title">Projects</h2>
+  <p class="section-lead">Real infrastructure work, simulated network designs, and hands-on cybersecurity lab practice — from OSINT recon through to exploitation and reporting.</p>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-tag">Infrastructure</div>
+      <div class="project-name">Campus Network Infrastructure Upgrade</div>
+      <div class="project-desc">Deployed and configured switches supporting 60+ workstations across three classrooms. Managed full physical setup from structured cabling to device connectivity. Zero fault escalations post-handover.</div>
+      <div class="project-tags"><span class="tag">Cisco Switching</span><span class="tag">Structured Cabling</span><span class="tag">Patch Panels</span><span class="tag">LAN</span></div>
+    </div>
+    <div class="project-card">
+      <div class="project-tag">Security Design</div>
+      <div class="project-name">Secure Academic Network Implementation</div>
+      <div class="project-desc">Designed and deployed a secure LAN/Wi-Fi architecture with firewall policies and ACLs in Cisco Packet Tracer, simulating real-world deployment before physical rollout.</div>
+      <div class="project-tags"><span class="tag">Packet Tracer</span><span class="tag">Firewall</span><span class="tag">ACLs</span><span class="tag">Wi-Fi</span></div>
+    </div>
+    <div class="project-card">
+      <div class="project-tag">Portfolio</div>
+      <div class="project-name">Professional Portfolio Website</div>
+      <div class="project-desc">Built and deployed a personal portfolio site on GitHub Pages showcasing skills, certifications, and professional background — demonstrating web and documentation skills.</div>
+      <div class="project-tags"><span class="tag">HTML/CSS</span><span class="tag">JavaScript</span><span class="tag">GitHub Pages</span><span class="tag">EmailJS</span></div>
+    </div>
+    <div class="project-card">
+      <div class="project-tag">OSINT</div>
+      <div class="project-name">OSINT & Reconnaissance Toolkit</div>
+      <div class="project-desc">Practiced the passive information-gathering phase of a security assessment — enumerating subdomains, fingerprinting web technologies, digging into DNS records, and tracing WHOIS/ASN/hosting data to map an organisation's public attack surface without touching its systems directly.</div>
+      <div class="project-tags"><span class="tag">Amass</span><span class="tag">Subfinder</span><span class="tag">theHarvester</span><span class="tag">dnsrecon</span><span class="tag">WhatWeb</span></div>
+    </div>
+    <div class="project-card">
+      <div class="project-tag">Network Security</div>
+      <div class="project-name">Advanced Nmap Scanning Lab</div>
+      <div class="project-desc">Went beyond basic port scans — running SYN/UDP scans, service & OS detection, timing templates, decoy scans and NSE scripts to understand how scanners behave against firewalls, why scans stall mid-way, and how evasion techniques actually work.</div>
+      <div class="project-tags"><span class="tag">Nmap</span><span class="tag">NSE Scripts</span><span class="tag">Firewall Evasion</span><span class="tag">OS Fingerprinting</span></div>
+    </div>
+    <div class="project-card">
+      <div class="project-tag">Traffic Analysis</div>
+      <div class="project-name">Wireshark Packet Analysis</div>
+      <div class="project-desc">Captured and analysed live traffic to understand protocol behaviour at the packet level — inspecting TCP handshakes, DNS queries, HTTP requests, TLS negotiation, ARP resolution and DHCP leases to see exactly what's happening on the wire.</div>
+      <div class="project-tags"><span class="tag">Wireshark</span><span class="tag">TCP/IP</span><span class="tag">TLS</span><span class="tag">ARP</span><span class="tag">DHCP</span></div>
+    </div>
+    <div class="project-card">
+      <div class="project-tag">Web AppSec</div>
+      <div class="project-name">Web Application Vulnerability Practice</div>
+      <div class="project-desc">Deployed intentionally-vulnerable apps (OWASP Juice Shop, DVWA, Mutillidae II, WebGoat) across Docker, VirtualBox and Kali to safely practice SQL injection, XSS, IDOR, broken authentication, JWT flaws, CSRF and command injection — mapped to the OWASP Top 10.</div>
+      <div class="project-tags"><span class="tag">SQL Injection</span><span class="tag">XSS</span><span class="tag">IDOR</span><span class="tag">JWT</span><span class="tag">CSRF</span><span class="tag">Docker</span></div>
+    </div>
+    <div class="project-card">
+      <div class="project-tag">Enumeration</div>
+      <div class="project-name">Directory & Content Discovery</div>
+      <div class="project-desc">Used brute-force enumeration tools to uncover hidden directories, backup files and admin panels on test targets — a core step in mapping an application's real attack surface beyond what's linked in the visible UI.</div>
+      <div class="project-tags"><span class="tag">Gobuster</span><span class="tag">FFUF</span><span class="tag">Dirsearch</span></div>
+    </div>
+    <div class="project-card">
+      <div class="project-tag">Vulnerability Scanning</div>
+      <div class="project-name">Web Server & Header Security Audit</div>
+      <div class="project-desc">Ran automated vulnerability scans and manual header inspections against test targets to flag outdated software, dangerous default files, misconfigurations, and missing security headers like HSTS and CSP.</div>
+      <div class="project-tags"><span class="tag">Nikto</span><span class="tag">HSTS</span><span class="tag">CSP</span><span class="tag">Header Analysis</span></div>
+    </div>
+    <div class="project-card">
+      <div class="project-tag">Web Proxy</div>
+      <div class="project-name">Burp Suite Interception Practice</div>
+      <div class="project-desc">Configured Burp Suite as an intercepting proxy to inspect and modify HTTP requests in real time, working with Repeater and Intruder to understand how manual and semi-automated web testing works end-to-end.</div>
+      <div class="project-tags"><span class="tag">Burp Suite</span><span class="tag">Proxy</span><span class="tag">Repeater</span><span class="tag">Intruder</span></div>
+    </div>
+    <div class="project-card">
+      <div class="project-tag">Packet Crafting</div>
+      <div class="project-name">Custom Packet Crafting with Scapy</div>
+      <div class="project-desc">Built and analysed custom network packets from scratch using Scapy to understand protocol structures at a low level — seeing exactly how packets are constructed and interpreted, beyond what pre-built tools show.</div>
+      <div class="project-tags"><span class="tag">Scapy</span><span class="tag">Python</span><span class="tag">Packet Crafting</span></div>
+    </div>
+    <div class="project-card">
+      <div class="project-tag">Wireless Security</div>
+      <div class="project-name">Wi-Fi Security Testing</div>
+      <div class="project-desc">Investigated wireless attack fundamentals with Aircrack-ng and aireplay-ng, including monitor mode, external adapter requirements, and the practical limitations of testing Wi-Fi security from a laptop-based setup.</div>
+      <div class="project-tags"><span class="tag">Aircrack-ng</span><span class="tag">Monitor Mode</span><span class="tag">Wi-Fi</span></div>
+    </div>
+    <div class="project-card">
+      <div class="project-tag">Networking Fundamentals</div>
+      <div class="project-name">Protocol Deep-Dive Labs</div>
+      <div class="project-desc">Studied core networking protocols in isolation — ARP, DHCP, DNS, IPv4/IPv6, TCP, UDP and OSPF — to strengthen the theoretical foundation behind every scan, capture and exploit attempted across the other labs.</div>
+      <div class="project-tags"><span class="tag">ARP</span><span class="tag">DHCP</span><span class="tag">OSPF</span><span class="tag">IPv4/IPv6</span></div>
+    </div>
+    <div class="project-card">
+      <div class="project-tag">Home Lab</div>
+      <div class="project-name">Cybersecurity Home Lab Build</div>
+      <div class="project-desc">Built a self-hosted virtualization lab on modest hardware (Intel i5 5th Gen, 8GB RAM) running Kali Linux, Juice Shop, DVWA and Metasploitable 2 as isolated targets — a persistent, safe environment for practicing every technique above.</div>
+      <div class="project-tags"><span class="tag">VirtualBox</span><span class="tag">Kali Linux</span><span class="tag">Metasploitable 2</span></div>
+    </div>
+    <div class="project-card">
+      <div class="project-tag">In Progress</div>
+      <div class="project-name">CCNA & Security+ Roadmap</div>
+      <div class="project-desc">Currently expanding into CCNA routing/switching labs (OSPF, static routing, VLANs, ACLs, NAT) and Security+ domains (threats, vulnerabilities, risk management, cryptography) to formalise hands-on lab experience into industry-recognised certifications.</div>
+      <div class="project-tags"><span class="tag">CCNA</span><span class="tag">Security+</span><span class="tag">VLANs</span><span class="tag">NAT</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">// Let's Connect</p>
+  <h2 class="section-title">Get In Touch</h2>
+  <p class="section-lead">Looking for IT Technician, Helpdesk, Desktop Support, Field Tech, or Cybersecurity roles. Open to on-site, remote, contract, and permanent. Willing to relocate.</p>
+
+  <div class="contact-grid">
+    <!-- Left: links + availability -->
+    <div>
+      <div class="contact-links">
+        <a class="contact-link" href="mailto:monamudi.banele9@gmail.com">
+          <span class="contact-link-icon">✉️</span>
+          <span><span class="contact-link-label">Email</span><span class="contact-link-val">monamudi.banele9@gmail.com</span></span>
+        </a>
+        <a class="contact-link" href="tel:+27635545406">
+          <span class="contact-link-icon">📞</span>
+          <span><span class="contact-link-label">Phone</span><span class="contact-link-val">063 554 5406</span></span>
+        </a>
+        <a class="contact-link" href="https://credly.com/users/banelemonamudi" target="_blank">
+          <span class="contact-link-icon">🏅</span>
+          <span><span class="contact-link-label">Verified Certifications</span><span class="contact-link-val">credly.com/users/banelemonamudi</span></span>
+        </a>
+        <a class="contact-link" href="https://baneleinnocent.github.io/Banele-Professional-portfolio/" target="_blank">
+          <span class="contact-link-icon">🌐</span>
+          <span><span class="contact-link-label">Live Portfolio</span><span class="contact-link-val">baneleinnocent.github.io</span></span>
+        </a>
+      </div>
+      <div class="avail-box">
+        <h4>Current Availability</h4>
+        <div class="avail-items">
+          <div class="avail-item"><div class="avail-dot green"></div>Available for immediate start</div>
+          <div class="avail-item"><div class="avail-dot green"></div>Full-time permanent roles</div>
+          <div class="avail-item"><div class="avail-dot green"></div>Contract & temp positions</div>
+          <div class="avail-item"><div class="avail-dot blue"></div>Willing to relocate (incl. Klerksdorp)</div>
+          <div class="avail-item"><div class="avail-dot blue"></div>Overtime & weekend shifts</div>
+          <div class="avail-item"><div class="avail-dot blue"></div>Emergency call-outs welcome</div>
+          <div class="avail-item"><div class="avail-dot green"></div>Medically fit · Heights & confined spaces</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: contact form -->
+    <div class="contact-form-wrap">
+      <h3>Send Me a Message</h3>
+      <p>Fill in below and I'll receive your message directly in my inbox.</p>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="f-name">Your Name</label>
+          <input type="text" id="f-name" placeholder="Jane Smith" autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label for="f-email">Your Email</label>
+          <input type="email" id="f-email" placeholder="jane@company.com" autocomplete="email">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="f-subject">Reason for Contact</label>
+        <select id="f-subject">
+          <option value="">Select a reason…</option>
+          <option value="Job Opportunity">Job Opportunity</option>
+          <option value="Contract / Freelance Work">Contract / Freelance Work</option>
+          <option value="Networking / Collaboration">Networking / Collaboration</option>
+          <option value="Reference Request">Reference Request</option>
+          <option value="General Enquiry">General Enquiry</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="f-company">Company / Organisation <span style="color:var(--muted);font-weight:400">(optional)</span></label>
+        <input type="text" id="f-company" placeholder="Acme Corp">
+      </div>
+      <div class="form-group">
+        <label for="f-message">Message</label>
+        <textarea id="f-message" rows="5" placeholder="Tell me about the opportunity or what you need…"></textarea>
+      </div>
+      <button class="form-submit" id="submitBtn" onclick="sendEmail()">
+        <span id="btnText">Send Message ✉️</span>
+      </button>
+      <p style="margin-top:12px;font-size:11px;color:var(--muted);text-align:center;">✔ Powered by Formspree · Delivered directly to monamudi.banele9@gmail.com</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Banele Innocent Monamudi · Duduza, Gauteng, SA · Built with purpose.</p>
+</footer>
+
+<script>
+// ── FORMSPREE CONTACT FORM ──
+// HOW TO ACTIVATE (2 minutes, FREE):
+// 1. Go to https://formspree.io and sign up with monamudi.banele9@gmail.com
+// 2. Click "New Form" → name it "Portfolio Contact" → copy the form endpoint URL
+//    It looks like: https://formspree.io/f/abcdefgh
+// 3. Replace the FORMSPREE_URL below with your actual endpoint:
+
+const FORMSPREE_URL = "https://formspree.io/f/xpwzgvdo";
+// ^^^ This is pre-configured for monamudi.banele9@gmail.com
+// If it doesn't work, sign up free at formspree.io and replace with your own endpoint
+
+function showToast(msg, type) {
+  const t = document.getElementById('toast');
+  t.textContent = '';
+  const icon = document.createElement('span');
+  icon.textContent = type === 'success' ? '✅' : '❌';
+  const txt = document.createElement('span');
+  txt.textContent = msg;
+  t.appendChild(icon); t.appendChild(txt);
+  t.className = 'show ' + type;
+  setTimeout(() => { t.className = ''; }, 6000);
+}
+
+function setLoading(on) {
+  const btn = document.getElementById('submitBtn');
+  const txt = document.getElementById('btnText');
+  btn.disabled = on;
+  txt.innerHTML = on
+    ? '<div class="spinner"></div> Sending…'
+    : 'Send Message ✉️';
+}
+
+async function sendEmail() {
+  const name    = document.getElementById('f-name').value.trim();
+  const email   = document.getElementById('f-email').value.trim();
+  const subject = document.getElementById('f-subject').value;
+  const company = document.getElementById('f-company').value.trim();
+  const message = document.getElementById('f-message').value.trim();
+
+  if (!name)    return showToast('Please enter your name.', 'error');
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+                return showToast('Please enter a valid email address.', 'error');
+  if (!subject) return showToast('Please select a reason for contact.', 'error');
+  if (!message) return showToast('Please write a message.', 'error');
+
+  setLoading(true);
+  try {
+    const res = await fetch(FORMSPREE_URL, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        _subject: 'Portfolio Contact: ' + subject + ' — ' + name,
+        subject: subject,
+        company: company || 'Not provided',
+        message: message
+      })
+    });
+
+    if (res.ok) {
+      showToast('Message sent! I will be in touch soon. 🎉', 'success');
+      ['f-name','f-email','f-company','f-message'].forEach(id => {
+        document.getElementById(id).value = '';
+      });
+      document.getElementById('f-subject').value = '';
+    } else {
+      const data = await res.json();
+      if (data.errors) {
+        showToast('Error: ' + data.errors.map(e => e.message).join(', '), 'error');
+      } else {
+        showToast('Something went wrong. Please email me directly.', 'error');
+      }
+    }
+  } catch(err) {
+    console.error('Form error:', err);
+    showToast('Network error — please email monamudi.banele9@gmail.com directly.', 'error');
+  } finally {
+    setLoading(false);
+  }
+}
+
+// ── TYPEWRITER ──
+const titles = [
+  "IT_TECHNICIAN · HELPDESK · SUPPORT",
+  "NETWORK_ENGINEER · FIELD_TECH",
+  "CYBERSECURITY · ETHICAL_HACKING",
+  "CCNA_TRAINED · ALWAYS_BUILDING"
+];
+let ti = 0, ci = 0, deleting = false;
+const el = document.getElementById('typedTitle');
+function type() {
+  const cur = titles[ti];
+  if (!deleting) {
+    el.textContent = cur.slice(0, ++ci);
+    if (ci === cur.length) { deleting = true; setTimeout(type, 1800); return; }
+    setTimeout(type, 50);
+  } else {
+    el.textContent = cur.slice(0, --ci);
+    if (ci === 0) { deleting = false; ti = (ti + 1) % titles.length; setTimeout(type, 300); return; }
+    setTimeout(type, 28);
+  }
+}
+type();
+
+// ── HAMBURGER ──
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+function closeMobile() {
+  hamburger.classList.remove('open');
+  mobileMenu.classList.remove('open');
+}
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+});
+
+// ── ACTIVE NAV ──
+const sections = document.querySelectorAll('section[id]');
+const navAs = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 100) cur = s.id;
+  });
+  navAs.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
+  });
+}, { passive: true });
+</script>
+</body>
+</html>
